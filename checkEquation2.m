@@ -16,7 +16,7 @@ parameters.biomechanics.g = 9.81;
 omega = sqrt(parameters.biomechanics.g/parameters.biomechanics.z_c);
 
 % define reference configuration
-p_0 = rand;
+p = rand;
 x_0 = rand;
 v_0 = rand;
 
@@ -28,15 +28,15 @@ parameters.control.b_p = 0;
 parameters.control.b_d = 0;
 
 % calculate numeric solutions
-results = simulateSlipWalker(T_total, parameters, x_0, v_0, p_0, dt);
+results = simulateSlipWalker(T_total, parameters, x_0, v_0, p, dt);
 x_end_numeric = results.continuous.x(end);
 v_end_numeric = results.continuous.v(end);
 p_end_numeric = results.continuous.p(end);
 
 % calculate analytic solutions for the same time
 time = results.continuous.time;
-x_analytic = p_0 + (x_0 - p_0)*cosh(omega * time) + v_0/omega*sinh(omega * time);
-v_analytic = (x_0 - p_0)*sinh(omega * time)*omega + v_0*cosh(omega * time);
+x_analytic = p + (x_0 - p)*cosh(omega * time) + v_0/omega*sinh(omega * time);
+v_analytic = (x_0 - p)*sinh(omega * time)*omega + v_0*cosh(omega * time);
 
 % collect results and print to command line
 x_end_analytic = x_analytic(end);
