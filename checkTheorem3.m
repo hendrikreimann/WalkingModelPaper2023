@@ -123,11 +123,142 @@ eq_eigenvalues_dneg_5 = - (1        )*c*b_p + (1        )*s*omega*b_d;
 eq_eigenvalues_dneg_6 = s*omega*b_d - c*b_p;
 
 % verify transformations
-disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_2))
-disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_3))
-disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_4))
+% disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_2))
+% disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_3))
+% disp(simplify(eq_eigenvalues_dneg_1 - eq_eigenvalues_dneg_4))
 
 
+% ----------------------------------------------------------------------------------------------------------------------
+% calculate Eigenvalues for representative points
+% ----------------------------------------------------------------------------------------------------------------------
+
+% define origin and directions as basis for the seven candidate points
+P_origin = [2*c; 2*s/omega];
+d_p = 2*s^2/c - 2*c;
+d_v = 2*c^2/(s*omega) - 2*s/omega;
+u_p = [d_p; 0];
+u_v = [0; d_v];
+
+% point 1
+P_1 = P_origin + 1/4*u_p + 1/4*u_v;
+b_p_P_1 = P_1(1);
+b_d_P_1 = P_1(2);
+
+trace_M_P_1_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_1 - s*omega*b_d_P_1);
+trace_M_P_1 = 0;
+discriminant_M_P_1_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_1 - 8*c^2*s*omega*b_d_P_1 + c^2*b_p_P_1^2 + 2*c*s*omega*b_p_P_1*b_d_P_1 + s^2*omega^2*b_d_P_1^2 - 4);
+discriminant_M_P_1_2 = 4*(c^2 - s^2)^2 - 4;
+discriminant_M_P_1 = 0;
+lambda_P_1_1 = 0.5*(trace_M_P_1 + sqrt(discriminant_M_P_1));
+lambda_P_1_2 = 0.5*(trace_M_P_1 - sqrt(discriminant_M_P_1));
+
+% disp(simplify(trace_M_P_1_1 - trace_M_P_1))
+% disp(simplify(discriminant_M_P_1_1 - discriminant_M_P_1_2))
+
+% point 2
+P_2 = P_origin + 3/2*u_p + 3/2*u_v;
+b_p_P_2 = P_2(1);
+b_d_P_2 = P_2(2);
+
+trace_M_P_2_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_2 - s*omega*b_d_P_2);
+trace_M_P_2 = 0;
+discriminant_M_P_2_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_2 - 8*c^2*s*omega*b_d_P_2 + c^2*b_p_P_2^2 + 2*c*s*omega*b_p_P_2*b_d_P_2 + s^2*omega^2*b_d_P_2^2 - 4);
+discriminant_M_P_2_2 = - 16*(c^2 - s^2)^2 - 4;
+discriminant_M_P_2 = -20;
+lambda_P_2_1 = 0.5*(trace_M_P_2 + sqrt(discriminant_M_P_2));
+lambda_P_2_2 = 0.5*(trace_M_P_2 - sqrt(discriminant_M_P_2));
+
+disp(simplify(trace_M_P_2_1 - trace_M_P_2))
+disp(simplify(discriminant_M_P_2_1 - discriminant_M_P_2_2))
+
+% point 3
+P_3 = P_origin + 3/2*u_p - 1/4*u_v;
+b_p_P_3 = P_3(1);
+b_d_P_3 = P_3(2);
+
+trace_M_P_3_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_3 - s*omega*b_d_P_3);
+trace_M_P_3_2 = 7/2*(c^2 - s^2);
+trace_M_P_3 = 7/2;
+discriminant_M_P_3_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_3 - 8*c^2*s*omega*b_d_P_3 + c^2*b_p_P_3^2 + 2*c*s*omega*b_p_P_3*b_d_P_3 + s^2*omega^2*b_d_P_3^2 - 4);
+discriminant_M_P_3_2 = 41/4*(c^4 - 2*c^2*s^2 + s^4) - 4;
+discriminant_M_P_3 = 41/4 - 4;
+lambda_P_3_1 = 0.5*(trace_M_P_3 + sqrt(discriminant_M_P_3));
+lambda_P_3_2 = 0.5*(trace_M_P_3 - sqrt(discriminant_M_P_3));
+
+disp(simplify(trace_M_P_3_1 - trace_M_P_3_2))
+disp(simplify(discriminant_M_P_3_1 - discriminant_M_P_3_2))
+
+% point 4
+P_4 = P_origin + 1/4*u_p - 1/4*u_v;
+b_p_P_4 = P_4(1);
+b_d_P_4 = P_4(2);
+
+trace_M_P_4_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_4 - s*omega*b_d_P_4);
+trace_M_P_4_2 = c^2 - s^2;
+trace_M_P_4 = 1;
+discriminant_M_P_4_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_4 - 8*c^2*s*omega*b_d_P_4 + c^2*b_p_P_4^2 + 2*c*s*omega*b_p_P_4*b_d_P_4 + s^2*omega^2*b_d_P_4^2 - 4);
+discriminant_M_P_4_2 = 9*(c^2 - s^2)^2 - 4;
+discriminant_M_P_4 = 5;
+lambda_P_4_1 = 0.5*(trace_M_P_4 + sqrt(discriminant_M_P_4));
+lambda_P_4_2 = 0.5*(trace_M_P_4 - sqrt(discriminant_M_P_4));
+
+disp(simplify(trace_M_P_4_1 - trace_M_P_4_2))
+disp(simplify(discriminant_M_P_4_1 - discriminant_M_P_4_2))
+
+% point 5
+P_5 = P_origin - 1/4*u_p - 1/4*u_v;
+b_p_P_5 = P_5(1);
+b_d_P_5 = P_5(2);
+
+trace_M_P_5_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_5 - s*omega*b_d_P_5);
+trace_M_P_5 = 0;
+discriminant_M_P_5_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_5 - 8*c^2*s*omega*b_d_P_5 + c^2*b_p_P_5^2 + 2*c*s*omega*b_p_P_5*b_d_P_5 + s^2*omega^2*b_d_P_5^2 - 4);
+discriminant_M_P_5_2 = 12*(c^2 - s^2)^2 - 4;
+discriminant_M_P_5 = 8;
+lambda_P_5_1 = 0.5*(trace_M_P_5 + sqrt(discriminant_M_P_5));
+lambda_P_5_2 = 0.5*(trace_M_P_5 - sqrt(discriminant_M_P_5));
+
+disp(simplify(discriminant_M_P_5_1 - discriminant_M_P_5_2))
+
+% point 4
+P_6 = P_origin - 1/4*u_p + 1/4*u_v;
+b_p_P_6 = P_6(1);
+b_d_P_6 = P_6(2);
+
+trace_M_P_6_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_6 - s*omega*b_d_P_6);
+trace_M_P_6_2 = s^2 - c^2;
+trace_M_P_6 = -1;
+discriminant_M_P_6_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_6 - 8*c^2*s*omega*b_d_P_6 + c^2*b_p_P_6^2 + 2*c*s*omega*b_p_P_6*b_d_P_6 + s^2*omega^2*b_d_P_6^2 - 4);
+discriminant_M_P_6_2 = 9*(c^2 - s^2)^2 - 4;
+discriminant_M_P_6 = 5;
+lambda_P_6_1 = 0.5*(trace_M_P_6 + sqrt(discriminant_M_P_6));
+lambda_P_6_2 = 0.5*(trace_M_P_6 - sqrt(discriminant_M_P_6));
+
+disp(simplify(trace_M_P_6_1 - trace_M_P_6_2))
+disp(simplify(discriminant_M_P_6_1 - discriminant_M_P_6_2))
+
+% point 3
+P_7 = P_origin - 1/4*u_p + 3/2*u_v;
+b_p_P_7 = P_7(1);
+b_d_P_7 = P_7(2);
+
+trace_M_P_7_1 = simplify(2*c^2 + 2*s^2 - c*b_p_P_7 - s*omega*b_d_P_7);
+trace_M_P_7_2 = -7/2*(c^2 - s^2);
+trace_M_P_7 = -7/2;
+discriminant_M_P_7_1 = simplify(4*c^4 + 4*2*c^2*s^2 + 4*s^4 - 8*s^2*c*b_p_P_7 - 8*c^2*s*omega*b_d_P_7 + c^2*b_p_P_7^2 + 2*c*s*omega*b_p_P_7*b_d_P_7 + s^2*omega^2*b_d_P_7^2 - 4);
+discriminant_M_P_7_2 = 41/4*(c^4 - 2*c^2*s^2 + s^4) - 4;
+discriminant_M_P_7 = 41/4 - 4;
+lambda_P_7_1 = 0.5*(trace_M_P_7 + sqrt(discriminant_M_P_7));
+lambda_P_7_2 = 0.5*(trace_M_P_7 - sqrt(discriminant_M_P_7));
+
+disp(simplify(trace_M_P_7_1 - trace_M_P_7_2))
+disp(simplify(discriminant_M_P_7_1 - discriminant_M_P_7_2))
+
+
+
+
+
+return
 
 
 
