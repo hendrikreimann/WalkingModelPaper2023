@@ -139,7 +139,6 @@ function ...
             step_distance_n = [step_distance_n; this_step_distance]; %#ok<AGROW>
             com_from_cop_at_step_end_n = [com_from_cop_at_step_end_n, x - p]; %#ok<AGROW>
             com_vel_at_step_end_n = [com_vel_at_step_end_n, v]; %#ok<AGROW>
-            eta_step_n = [eta_step_n, eta_step]; %#ok<AGROW>
             p = p_new;
             
             % store indices
