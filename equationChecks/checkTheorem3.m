@@ -256,13 +256,20 @@ disp(simplify(discriminant_M_P_7_1 - discriminant_M_P_7_2))
 
 
 
+% ----------------------------------------------------------------------------------------------------------------------
+% look at M for point 1
+% ----------------------------------------------------------------------------------------------------------------------
 
+% look at M, because this is the optimal point
+M_1 = [(- c*b_p_P_1 + c^2 + s^2),  - (c*b_d_P_1 - 2/omega*c*s); (2*c - b_p_P_1)*omega*s, (- b_d_P_1*omega*s + c^2 + s^2)];  % definition of M
+M_2 = [(- c*(s^2/(2*c) + (3*c)/2) + c^2 + s^2),  - (c*(c^2/(2*omega*s) + (3*s)/(2*omega)) - 2/omega*c*s); (2*c - (s^2/(2*c) + (3*c)/2))*omega*s, (- (c^2/(2*omega*s) + (3*s)/(2*omega))*omega*s + c^2 + s^2)];  % plug in b_p and b_d
+M_3 = [-1/2*(c^2 - s^2), -(c*(c^2 - s^2))/(2*omega*s); (omega*s*(c^2 - s^2))/(2*c), 1/2*(c^2 - s^2)];     % simplify
+M_4 = [-1/2*(1        ), -(c*(1        ))/(2*omega*s); (omega*s*(1        ))/(2*c), 1/2*(1        )];     % apply hyperbolic identity
+M_5 = [-1/2, -c/(2*omega*s); omega*s/(2*c), 1/2];     % simplify
 
-return
-
-
-
-
+% disp(simplify(M_1 - M_2))
+% disp(simplify(M_1 - M_3))
+% disp(simplify(M_4 - M_5))
 
 
 
