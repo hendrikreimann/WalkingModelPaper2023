@@ -1,8 +1,8 @@
 % Create graphs for Figure 1: Example Trajectories
 
 % flags
-individual_figures          = 0;
-save_figures                = 0;
+individual_figures          = 1;
+save_figures                = 1;
 labels                      = 'off';
 
 % visualization parameters
@@ -14,14 +14,15 @@ figure_height_path = 950;
 % colors
 color_r = hex2rgb('#009ADE');
 color_1 = hex2rgb('#FFC61E');
-color_2 = hex2rgb('#00CD6C');
-color_3 = hex2rgb('#AF58BA');
+color_2 = hex2rgb('#DE400B');
+color_3 = hex2rgb('#920BDB');
 
-colors = lines(8);
-color_r = colors(1, :);
-color_1 = colors(3, :);
-color_2 = colors(5, :);
-color_3 = colors(4, :);
+
+% colors = lines(8);
+% % color_r = colors(1, :);
+% % color_1 = colors(3, :);
+% color_2 = colors(5, :);
+% color_3 = colors(4, :);
 
 % set parameters
 dt = 1e-4;
@@ -130,7 +131,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('anterior-posterior position', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ap_pos' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -155,7 +156,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('anterior-posterior velocity', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ap_vel' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -180,7 +181,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('anterior-posterior relative position', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ap_posrel' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -208,7 +209,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('lateral position', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ml_pos' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -233,7 +234,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('lateral velocity', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ml_vel' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -258,7 +259,7 @@ xlabel('time (s)', 'fontsize', 14)
 ylabel('lateral relative position', 'fontsize', 14)
 if individual_figures && save_figures
     filename = ['fig_example_ml_posrel' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -289,7 +290,7 @@ xlim([-0.5 0.6])
 ylim([-0.15 5.35])
 if individual_figures && save_figures
     filename = ['fig_example_path' label];
-    print(gcf, ['..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(gcf)
 end
 
@@ -297,6 +298,6 @@ end
 if ~individual_figures && save_figures
     % save with labels
     filename_with = 'fig_trajectoryExample';
-    print(gcf, ['..' filesep 'figures_raw' filesep filename_with], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename_with], '-djpeg', '-r300')
 end
 

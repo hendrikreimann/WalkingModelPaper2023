@@ -1,7 +1,7 @@
 
 % flags
 save_figure             = 1;
-labels                  = 'on';
+labels                  = 'off';
 
 % parameters
 cadences_to_use = [80 110];
@@ -18,7 +18,7 @@ color_110 = hex2rgb('#FFC61E');
 % color_2 = hex2rgb('#00CD6C');
 % color_3 = hex2rgb('#AF58BA');
 
-colors = [color_80; color_110; color_2; color_3];
+colors = [color_80; color_110;];
 
 % dependent variables
 minute_to_second = 1/60;
@@ -93,7 +93,7 @@ for i_cadence = 1 : number_of_cadences
     patch([P1(1) P2(1) P3(1)], [P1(2) P2(2) P3(2)], [0 0 0], 'facecolor', lightenColor(this_color, 0.5), 'edgecolor', 'none')
 
     % plot data
-    markersize = 8;
+    markersize = 10;
     plot ...
       ( ...
         beta_p_data{i_cadence}, beta_v_data{i_cadence}, ...

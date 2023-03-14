@@ -4,7 +4,7 @@ plot_delimiter_lines    = 1;
 plot_triangle           = 0;
 plot_data               = 0;
 plot_zero_cover         = 1;
-save_figure             = 0;
+save_figure             = 1;
 labels                  = 'off';
 
 cadence_to_use = 120;
