@@ -4,7 +4,7 @@ plot_delimiter_lines    = 1;
 plot_triangle           = 0;
 plot_data               = 0;
 plot_zero_cover         = 1;
-save_figure             = 1;
+save_figure             = 0;
 labels                  = 'off';
 
 cadence_to_use = 120;
@@ -21,7 +21,7 @@ step_time = stride_time * 0.5;
 b_p_min = 0;
 b_p_max = 5;
 b_v_min = 0;
-b_v_max = 2;
+b_v_max = 1.5;
 b_p_number_of_steps = 2001; % set this to 1000 or so for final figures
 b_v_number_of_steps = 2001;
 
@@ -132,12 +132,12 @@ end
 if save_figure
     % save with labels
     filename = ['fig_stabilityRegion_' file_label];
-    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r600')
     
     % also export an image that contains the colorbar
     if strcmp(labels, 'off')
         this_colorbar = colorbar('direction', 'reverse', 'ticks', [], 'box', 'off', 'color', 'none');
-        print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename '_colorbar'], '-djpeg', '-r300')
+        print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename '_colorbar'], '-djpeg', '-r600')
         delete(this_colorbar)
     end
 end
