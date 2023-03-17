@@ -2,8 +2,8 @@
 
 % flags
 individual_figures          = 1;
-save_figures                = 1;
-labels                      = 'off';
+save_figures                = 0;
+labels                      = 'on';
 
 % visualization parameters
 figure_width_traj = 600;
@@ -16,13 +16,6 @@ color_r = hex2rgb('#009ADE');
 color_1 = hex2rgb('#FFC61E');
 color_2 = hex2rgb('#DE400B');
 color_3 = hex2rgb('#920BDB');
-
-
-% colors = lines(8);
-% % color_r = colors(1, :);
-% % color_1 = colors(3, :);
-% color_2 = colors(5, :);
-% color_3 = colors(4, :);
 
 % set parameters
 dt = 1e-4;

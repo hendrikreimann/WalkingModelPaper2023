@@ -3,8 +3,8 @@
 % flags
 plot_ap         = 1;
 plot_ml         = 1;
-save_figures    = 0;
-labels          = 'on';
+save_figures    = 1;
+labels          = 'off';
 
 % set parameters
 dt = 1e-4;
@@ -135,7 +135,7 @@ linewidth_guides = 4;
 % ----------------------------------------------------------------------------------------------------------------------
 
 if plot_ap
-    fig = figure('position', [0, 0, 800 800]);
+    fig = figure('position', [0, 0, 800 800], 'renderer', 'painters');
     if strcmp(labels, 'on')
         ax = axes; hold on;
         label = 'withLabels';
@@ -181,7 +181,7 @@ end
 if plot_ap && save_figures
     % save with labels
     filename = ['fig_phase_ap_' label];
-    print(gcf, ['..' filesep 'figures' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
 
     close(gcf)
 end
@@ -192,7 +192,7 @@ end
 % ----------------------------------------------------------------------------------------------------------------------
 
 if plot_ml
-    fig = figure('position', [0, 0, 800 800]);
+    fig = figure('position', [0, 0, 800 800], 'renderer', 'painters');
     if strcmp(labels, 'on')
         ax = axes; hold on;
         label = 'withLabels';
@@ -238,7 +238,7 @@ end
 if plot_ml && save_figures
     % save with labels
     filename = ['fig_phase_ml_' label];
-    print(gcf, ['..' filesep 'figures' filesep filename], '-djpeg', '-r300')
+    print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
 
     close(gcf)
 end

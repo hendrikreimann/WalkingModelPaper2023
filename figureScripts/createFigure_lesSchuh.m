@@ -1,5 +1,6 @@
 % flags
 save_figures                = 0;
+run_stats                   = 1;
 labels                      = 'on';
 
 % load and extract data
@@ -13,6 +14,12 @@ beta_p_lesschuh = beta_p(:,4);
 beta_d = squeeze(beta2(:,soi,:));
 beta_d_normal = beta_d(:,3);
 beta_d_lesschuh = beta_d(:,4);
+
+% stats
+if run_stats
+    [hypothesis_p, p_value_p] = ttest(beta_p_normal, beta_p_lesschuh)
+    [hypothesis_v, p_value_v] = ttest(beta_d_normal, beta_d_lesschuh)
+end
 
 % define visualization stuff
 figure_width = 400;

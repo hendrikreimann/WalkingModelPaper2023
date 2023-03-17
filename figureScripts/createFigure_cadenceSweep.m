@@ -1,6 +1,7 @@
 % flags
-save_figures            = 1;
-labels                  = 'off';
+save_figures            = 0;
+labels                  = 'on';
+beta_d               = 1;
 
 % parameters
 cadences = 70 : 120;
@@ -87,6 +88,11 @@ for i_cadence = 1 : number_of_cadences_human
     beta_p_data{i_cadence} = beta_p;
     beta_v_data{i_cadence} = beta_v;
     cadence_actual_data{i_cadence} = cadence_actual;
+end
+
+if run_stats
+    [hypothesis_p, p_value_p] = ttest(beta_p_data{1}, beta_p_data{2})
+    [hypothesis_v, p_value_v] = ttest(beta_v_data{1}, beta_v_data{2})
 end
 
 % figure for b_p

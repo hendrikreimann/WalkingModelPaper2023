@@ -1,7 +1,7 @@
 
 % flags
-save_figure             = 1;
-labels                  = 'off';
+save_figure             = 0;
+labels                  = 'on';
 
 % parameters
 cadences_to_use = [80 110];
