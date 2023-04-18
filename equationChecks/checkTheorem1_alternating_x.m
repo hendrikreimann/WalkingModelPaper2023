@@ -13,8 +13,8 @@ evalin(symengine,'assume(n,Type::Integer)')
 
 % intermediate variables and identities
 p_np1 = p_n + (-1)^n*b_o + b_p*(x_n-p_n) + b_d*v_n;
-x_np1 = p_n + (-1)^n*b_o*(1-c) + (c^2 + s^2 + b_p*(1-c))*(x_n-p_n) + (b_d*(1-c) + 2*c*s/omega)*v_n; % equation XX from Lemma 1 (eq_transition_ap)
-v_np1 = - (-1)^n*b_o*s*omega + (2*c - b_p)*s*omega*(x_n-p_n) + (c^2 + s^2 - b_d*s*omega)*v_n;       % equation XX from Lemma 1 (eq_transition_ap)
+x_np1 = p_n + (-1)^n*b_o*(1-c) + (c^2 + s^2 + b_p*(1-c))*(x_n-p_n) + (b_d*(1-c) + 2*c*s/omega)*v_n; % Equation 16 from Lemma 1
+v_np1 = - (-1)^n*b_o*s*omega + (2*c - b_p)*s*omega*(x_n-p_n) + (c^2 + s^2 - b_d*s*omega)*v_n;       % Equation 16 from Lemma 1
 
 % define hyperbolic identities to be used
 hyp_id_1 = c^2 + s^2 == 2*s^2 + 1;

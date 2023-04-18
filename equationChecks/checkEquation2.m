@@ -1,5 +1,4 @@
 % Script to check Equation 2 (eq_analyticSystemSolution) of the paper.
-
 disp('Solving walking system for one very long stance duration with random initial contitions');
 disp('This table compares the numeric with the analytical solution from Equation 2 in the paper:')
 
@@ -11,7 +10,7 @@ stepping_frequency = 0.1;   % this is set to a low number to get more time befor
 parameters.biomechanics = struct;
 T_total = 1/stepping_frequency * 0.25;
 T_step = 1/(2*stepping_frequency);
-parameters.biomechanics.z_c = 0.814;            % repeats the values in the simulation
+parameters.biomechanics.z_c = 0.814;
 parameters.biomechanics.g = 9.81;
 omega = sqrt(parameters.biomechanics.g/parameters.biomechanics.z_c);
 

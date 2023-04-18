@@ -22,12 +22,12 @@ delta_v_n = v_n - v_n_ref;                                                      
 hyp_id_1 = c^2 + s^2 == 2*s^2 + 1;
 
 % calculate new delta_q
-delta_q_np1_1 = q_np1 - q_n_ref;                                                % definition
-delta_q_np1_2 = - c*b_o + (c^2 + s^2 - c*b_p)*q_n - (b_d - 2*s/omega)*c*v_n;    % plug in equations from above
+delta_q_np1_1 = q_np1 - q_n_ref;                                                    % definition
+delta_q_np1_2 = - c*b_o + (c^2 + s^2 - c*b_p)*q_n - (b_d - 2*s/omega)*c*v_n;        % plug in equations from above
 delta_q_np1_3 = - c*b_o + (c^2 + s^2 - c*b_p)*(delta_q_n + q_n_ref) - (b_d - 2*s/omega)*c*(delta_v_n + v_n_ref);    % plug in q_n and v_n
 delta_q_np1_4 = - c*b_o + (c^2 + s^2 - c*b_p)*delta_q_n - (b_d - 2*s/omega)*c*(delta_v_n + b_o/(2*s/omega - b_d));    % plug in q_n_ref and v_n_ref
 delta_q_np1_5 = - c*b_o + (c^2 + s^2 - c*b_p)*delta_q_n - (b_d - 2*s/omega)*c*delta_v_n  - (b_d - 2*s/omega)*c*b_o/(2*s/omega - b_d);    % expand
-delta_q_np1_6 = (c^2 + s^2 - c*b_p)*delta_q_n - (b_d - 2*s/omega)*c*delta_v_n;    % simplify
+delta_q_np1_6 = (c^2 + s^2 - c*b_p)*delta_q_n - (b_d - 2*s/omega)*c*delta_v_n;      % simplify
 
 % verify transformations
 disp(simplify(delta_q_np1_1 - delta_q_np1_2))

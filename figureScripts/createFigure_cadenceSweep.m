@@ -1,12 +1,18 @@
 % flags
 save_figures            = 0;
 labels                  = 'on';
-beta_d               = 1;
+beta_d                  = 1;
+run_stats               = 1;
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 % parameters
 cadences = 70 : 120;
-z_c = 0.814;
+z_c = 0.77;
 g = 9.81;
+
+% play around with different values of omega
 
 % visualization parameters
 figure_width = 600;
@@ -91,8 +97,8 @@ for i_cadence = 1 : number_of_cadences_human
 end
 
 if run_stats
-    [hypothesis_p, p_value_p] = ttest(beta_p_data{1}, beta_p_data{2})
-    [hypothesis_v, p_value_v] = ttest(beta_v_data{1}, beta_v_data{2})
+    [hypothesis_p, p_value_p] = ttest(beta_p_data{1}, beta_p_data{2});
+    [hypothesis_v, p_value_v] = ttest(beta_v_data{1}, beta_v_data{2});
 end
 
 % figure for b_p

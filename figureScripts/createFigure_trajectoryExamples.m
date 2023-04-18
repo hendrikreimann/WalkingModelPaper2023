@@ -1,9 +1,12 @@
 % Create graphs for Figure 1: Example Trajectories
 
 % flags
-individual_figures          = 1;
+individual_figures          = 0;
 save_figures                = 0;
-labels                      = 'on';
+labels                      = 'off';
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 % visualization parameters
 figure_width_traj = 600;
@@ -22,7 +25,7 @@ dt = 1e-4;
 metronome_frequency = 1;
 T_total = 3;
 T_step = 1/(2*metronome_frequency);
-z_c = 0.814;            % repeats the values in the simulation
+z_c = 1;
 g = 9.81;
 omega = sqrt(g/z_c);
 c = cosh(omega * T_step * 0.5);
@@ -279,8 +282,8 @@ plot(results_alt_3.continuous.p, results_prg_3.continuous.p, 'color', color_2, '
 xlabel('lateral position', 'fontsize', 14)
 ylabel('anterior-posterior position', 'fontsize', 14)
 % axis equal
-xlim([-0.5 0.6])
-ylim([-0.15 5.35])
+xlim([-0.3 0.7])
+ylim([-0.5 4])
 if individual_figures && save_figures
     filename = ['fig_example_path' label];
     print(gcf, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')

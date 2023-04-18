@@ -11,8 +11,8 @@ syms q_n
 syms v_n
 
 % intermediate variables and identities
-q_np1 = - c*b_o + (c^2 + s^2 - c*b_p)*q_n - (b_d - 2*s/omega)*c*v_n;                                        % equation XX from Lemma 1 (eq_transition_ap)
-v_np1 = - s*omega*b_o + (2*c - b_p)*s*omega*q_n - (s*omega*b_d - c^2 - s^2)*v_n;                            % equation XX from Lemma 1 (eq_transition_ap)
+q_np1 = - c*b_o + (c^2 + s^2 - c*b_p)*q_n - (b_d - 2*s/omega)*c*v_n;                          % Equation 15 from Lemma 1
+v_np1 = - s*omega*b_o + (2*c - b_p)*s*omega*q_n - (s*omega*b_d - c^2 - s^2)*v_n;              % Equation 15 from Lemma 1
 
 % define hyperbolic identities to be used
 hyp_id_1 = c^2 + s^2 == 2*s^2 + 1;

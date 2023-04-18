@@ -24,12 +24,7 @@ function plotArrowhead(ax, anchor, target, length, width, color)
     D = pixelToAxes([D_pixel_x, D_pixel_y]);
     
     plot(ax, [A(1) B(1) D(1) C(1) A(1)], [A(2) B(2) D(2) C(2) A(2)])
-    
     patch(ax, 'XData', [B(1) D(1) C(1) B(1)], 'YData', [B(2) D(2) C(2) B(2)], 'FaceColor', color, 'linewidth', 0.5, 'EdgeColor', color')
-
-%     plot(ax, [A(1) D(1)], [A(2) D(2)])
-%     plot(ax, [A(1) B(1)], [A(2) B(2)])
-%     plot(ax, [A(1) C(1)], [A(2) C(2)])
 
 function point_pixel = axesToPixel(point_axes)
     x_pixel = axes_origin_pixel(1) + axes_origin_pixel(3) * (point_axes(1)-xlimit(1))/(xlimit(2)-xlimit(1));

@@ -12,15 +12,14 @@ syms n
 evalin(symengine,'assume(n,Type::Integer)')
 
 % define intermediate variables
-xt1 = p_n + (x_n - p_n)*c + v_n/omega * s;              % Equation 24-26 (eq_lemma1_1 - 3)
-vt1 = (x_n - p_n)*s*omega + v_n*c;                      % Equation 24-26 (eq_lemma1_1 - 3)
-p_np1 = p_n + b_o + b_p*(x_n-p_n) + b_d*v_n;            % Equation 3 (eq_footPlacement_ap)
-x_np1 = p_np1 + (xt1 - p_np1)*c + vt1*s/omega;          % equation 2 (eq_analyticSystemSolution)
-q_n = x_n - p_n;                                        % equation 5 (eq_def_q_prg)
+xt1 = p_n + (x_n - p_n)*c + v_n/omega * s;              % Equation 17
+vt1 = (x_n - p_n)*s*omega + v_n*c;                      % Equation 17
+p_np1 = p_n + b_o + b_p*(x_n-p_n) + b_d*v_n;            % Equation 3
+x_np1 = p_np1 + (xt1 - p_np1)*c + vt1*s/omega;          % Equation 2
+q_n = x_n - p_n;                                        % Equation 6
 
-% Equation 24 (eq_lemma1_1) is application of Equation 2 (eq_analyticSystemSolution)
-% Equation 25 (eq_lemma1_2) is plugging in the shorthand definition in Equation 5 (eq_hyperbolicConstants)
-% Equation 26 (eq_lemma1_3) is plugging in the definition of q in Equation 6 (eq_def_q_prg)
+% Equation 17 is application of Equation 2
+% Equation 18 is plugging in the shorthand definition in Equation 5
 
 disp('This code simplifies equations and then calculates the differences between the old and the new version.')
 disp('Differences are printed into the command line and should be 0.')

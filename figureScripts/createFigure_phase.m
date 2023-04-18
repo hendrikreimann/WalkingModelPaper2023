@@ -3,15 +3,18 @@
 % flags
 plot_ap         = 1;
 plot_ml         = 1;
-save_figures    = 1;
-labels          = 'off';
+save_figures    = 0;
+labels          = 'on';
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 % set parameters
 dt = 1e-4;
 metronome_frequency = 1;
 T_total = 1;
 T_step = 1/(2*metronome_frequency);
-z_c = 0.814;            % repeats the values in the simulation
+z_c = 1;
 g = 9.81;
 omega = sqrt(g/z_c);
 c = cosh(omega * T_step * 0.5);
@@ -34,9 +37,6 @@ v_0_prg = b_o_prg*omega / (2*s - b_d_alt*omega);
 p_0_alt = 0.0;
 x_0_alt = b_o_alt / (2*c - b_p_alt);
 v_0_alt = 0;
-
-% step_length = b_o_prg + b_o_prg*b_d_prg/(2*s/omega - b_d_prg);
-% step_width = b_o_alt + b_o_alt*b_p_alt/(2*c - b_p_alt);
 
 % define control structs
 parameters_prg.control = struct;
@@ -135,7 +135,7 @@ linewidth_guides = 4;
 % ----------------------------------------------------------------------------------------------------------------------
 
 if plot_ap
-    fig = figure('position', [0, 0, 800 800], 'renderer', 'painters');
+    figure('position', [0, 0, 800 800], 'renderer', 'painters');
     if strcmp(labels, 'on')
         ax = axes; hold on;
         label = 'withLabels';
@@ -143,17 +143,16 @@ if plot_ap
         ax = axes('position', [0 0 1 1]); hold on
         label = 'noLabels';
     end
-    y_min = -2.5;
-    y_max = 2.5;
+    y_min = -1.8;
+    y_max = 1.8;
     xlim([0 x_end_prg])
     ylim([y_min y_max])
 
-    x_grid = [0.15 0.3];
-    v_grid = [0.5 1 1.5 2];
-    omega = 3.4715;
+    x_grid = [0.1 0.2];
+    v_grid = [0.5 1 1.5];
+%     omega = 3.4715;
 
     % guidelines
-%     plot([0 x_end_prg], [0 0], 'linewidth', linewidth_guides, 'color', color_guides)
     plot([x_step_1_prg x_step_1_prg], [y_min y_max], 'linewidth', linewidth_guides, 'color', color_guides)
     plot([x_step_2_prg x_step_2_prg], [y_min y_max], 'linewidth', linewidth_guides, 'color', color_guides)
 
@@ -165,7 +164,7 @@ if plot_ap
     % phase portraits
     drawSlipPhasePortrait(ax, 0, 0, x_step_1_prg, y_min, y_max, x_grid, [-v_grid v_grid], omega, graphic_specs, arrow_specs)
     drawSlipPhasePortrait(ax, p_step_1_prg, x_step_1_prg, x_step_2_prg, y_min, y_max, p_step_1_prg+[-x_grid x_grid], [-v_grid v_grid], omega, graphic_specs, arrow_specs)
-    drawSlipPhasePortrait(ax, p_step_2_prg, x_step_2_prg, x_end_prg, y_min, y_max, p_step_2_prg+[-x_grid], [-v_grid v_grid], omega, graphic_specs, arrow_specs)
+    drawSlipPhasePortrait(ax, p_step_2_prg, x_step_2_prg, x_end_prg, y_min, y_max, p_step_2_prg - x_grid, [-v_grid v_grid], omega, graphic_specs, arrow_specs)
     
     % arrows
     for i_arrow = 1 : length(arrows_prg_x)
@@ -200,14 +199,14 @@ if plot_ml
         ax = axes('position', [0 0 1 1]); hold on
         label = 'noLabels';
     end
-    y_min = -0.33;
-    y_max = 0.33;
+    y_min = -0.5;
+    y_max = 0.5;
     xlim([0 p_step_1_alt])
     ylim([y_min y_max])
 
-    x_grid = [0.02 0.04 0.06 0.08];
-    v_grid = [0.075 0.15 0.225 0.3];
-    omega = 3.4715;
+    x_grid = [0.04 0.08 0.12 0.16];
+    v_grid = [0.1 0.2 0.3 0.4];
+%     omega = 3.4715;
 
     % guidelines
 %     plot([0 p_step_1_alt], [0 0], 'linewidth', linewidth_guides, 'color', color_guides)
@@ -221,7 +220,7 @@ if plot_ml
 
     % phase portraits
     drawSlipPhasePortrait(ax, 0, 0, x_step_1_alt, y_min, y_max, x_grid, [-v_grid v_grid], omega, graphic_specs, arrow_specs)
-    drawSlipPhasePortrait(ax, p_step_1_alt, x_step_1_alt, p_step_1_alt, y_min, y_max, p_step_1_alt+[-x_grid], [-v_grid v_grid], omega, graphic_specs, arrow_specs)
+    drawSlipPhasePortrait(ax, p_step_1_alt, x_step_1_alt, p_step_1_alt, y_min, y_max, p_step_1_alt - x_grid, [-v_grid v_grid], omega, graphic_specs, arrow_specs)
 %     drawSlipPhasePortrait(ax, p_step_2, x_step_2, x_end, y_min, y_max, p_step_2+[-x_grid], [-v_grid v_grid], omega, graphic_specs, arrow_specs)
 
     % arrows

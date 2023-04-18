@@ -3,6 +3,9 @@ save_figures                = 0;
 run_stats                   = 1;
 labels                      = 'on';
 
+% suppress warnings from flags
+%#ok<*UNRCH> 
+
 % load and extract data
 data_file = '../../data/16-Nov-2022_R2_stepwidth.mat';
 load(data_file)
@@ -17,8 +20,8 @@ beta_d_lesschuh = beta_d(:,4);
 
 % stats
 if run_stats
-    [hypothesis_p, p_value_p] = ttest(beta_p_normal, beta_p_lesschuh)
-    [hypothesis_v, p_value_v] = ttest(beta_d_normal, beta_d_lesschuh)
+    [hypothesis_p, p_value_p] = ttest(beta_p_normal, beta_p_lesschuh);
+    [hypothesis_v, p_value_v] = ttest(beta_d_normal, beta_d_lesschuh);
 end
 
 % define visualization stuff
@@ -47,7 +50,7 @@ elseif strcmp(labels, 'off')
     label = 'noLabels';
 end
 xlim(xlimits)
-bar(1:3,[nanmean(beta_p_normal) NaN nanmean(beta_p_lesschuh)], width, 'linewidth', 2)
+bar(1:3,[mean(beta_p_normal) NaN mean(beta_p_lesschuh)], width, 'linewidth', 2)
 for i_line = 1 : length(beta_p_normal)
     plot([1 3] + jitter(i_line), [beta_p_normal(i_line, :) beta_p_lesschuh(i_line, :)],'Color', color_r, 'linewidth', 1)
 end
@@ -79,7 +82,7 @@ elseif strcmp(labels, 'off')
     label = 'noLabels';
 end
 xlim(xlimits)
-bar(1:3,[nanmean(beta_d_normal) NaN nanmean(beta_d_lesschuh)], width, 'linewidth', 2)
+bar(1:3,[mean(beta_d_normal) NaN mean(beta_d_lesschuh)], width, 'linewidth', 2)
 for i_line = 1 : length(beta_d_normal)
     plot([1 3] + jitter(i_line), [beta_d_normal(i_line, :) beta_d_lesschuh(i_line, :)],'Color', color_r, 'linewidth', 1)
 end
@@ -99,28 +102,7 @@ if save_figures
     print(fig_vel, ['..' filesep '..' filesep 'figures_raw' filesep filename], '-djpeg', '-r300')
     close(fig_vel)
 end
-return
 
-% B2
-figure;
-varoi=squeeze(beta2(:,soi,:));
-
-bar(1:3,[nanmean(varoi(:,3)) NaN nanmean(varoi(:,4))],'linewidth',4)
-hold on
-plot(1, varoi(:,3),'o','Color', color_r)
-plot(3, varoi(:,4),'o','Color', color_r)
-
-% line graphs
-plot([1 3], [varoi(:,3) varoi(:,4)],'Color', color_r)
-
-xticks(1:3)
-xticklabels({'Normal',[],'Lesschuh'})
-h=gca; h.XAxis.TickLength = [0 0];
-box off
-
-title(sprintf('\\beta_2 at %.0f%% of step',soi/50*100))
-ylabel('\beta_2')
-saveas(gcf,'beta2.pdf')
 
 
 

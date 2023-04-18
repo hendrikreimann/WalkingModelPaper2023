@@ -1,5 +1,4 @@
 function ...
-graphic_objects = ...
 drawSlipPhasePortrait ...
   ( ...
     ax, ...
@@ -15,15 +14,6 @@ drawSlipPhasePortrait ...
     arrow_specs ...
   )
 
-    % for testing
-%     hold on
-%     xline(x_min)
-%     xline(x_max)
-%     yline(v_min)
-%     yline(v_max)
-%     xlim([x_min x_max] + [-0.2 0.2]);
-%     ylim([v_min v_max] + [-0.2 0.2]);
-    
     % default inputs
     if nargin < 10
         graphic_specs = struct;
@@ -57,8 +47,6 @@ drawSlipPhasePortrait ...
         lower_right_x = x_max;
         lower_right_v = -(lower_right_x-p) * omega;
     end
-%     plot(upper_left_x, upper_left_v, 'o', 'markersize', 20, 'markerfacecolor', 'b')
-%     plot(lower_right_x, lower_right_v, 'o', 'markersize', 20, 'markerfacecolor', 'b')
     plot([upper_left_x lower_right_x], [upper_left_v lower_right_v], 'linewidth', graphic_specs.diagonal_width, 'color', graphic_specs.diagonal_color)
     
     if omega*(x_max-p) > v_max
@@ -76,11 +64,7 @@ drawSlipPhasePortrait ...
         lower_left_x = x_min;
         lower_left_v = (lower_left_x-p) * omega;
     end
-%     plot(upper_right_x, upper_right_v, 'o', 'markersize', 20, 'markerfacecolor', 'r')
-%     plot(lower_left_x, lower_left_v, 'o', 'markersize', 20, 'markerfacecolor', 'r')
     plot([lower_left_x upper_right_x], [lower_left_v upper_right_v], 'linewidth', graphic_specs.diagonal_width, 'color', graphic_specs.diagonal_color)
-    
-    
     
     % create orbits intersecting x-axis
     for i_orbit = 1 : length(orbits_intercepts_x)
@@ -115,23 +99,11 @@ drawSlipPhasePortrait ...
         plot(ax, x_here, v_here, 'linewidth', graphic_specs.linewidth, 'color', graphic_specs.line_color);
         
         % arrows
-        % arrows are slow and have a slight error in direction, remove instead of fixing
         arrow_times_pos = arrow_specs.dt*0.5 : arrow_specs.dt : t_max;
         arrow_times_neg = -arrow_specs.dt*0.5 : -arrow_specs.dt : t_min;
         arrow_times = [flip(arrow_times_neg) arrow_times_pos];
         anchors_x = p + (x_0 - p)*cosh(omega*arrow_times) + v_0/omega*sinh(omega*arrow_times);
         anchors_v = (x_0 - p)*sinh(omega*arrow_times)*omega + v_0*cosh(omega*arrow_times);
-%         arrow_times_delta = arrow_times + 1e-6;
-%         anchors_x_delta = p + (x_0 - p)*cosh(omega*arrow_times_delta) + v_0/omega*sinh(omega*arrow_times_delta);
-%         anchors_v_delta = (x_0 - p)*sinh(omega*arrow_times_delta)*omega + v_0*cosh(omega*arrow_times_delta);
-%         arrows_x = anchors_x_delta - anchors_x;
-%         arrows_v = anchors_v_delta - anchors_v;
-%         angles = atan2(arrows_v, arrows_x);
-%         
-%         for i_arrow = 1 : length(angles)
-%             plotArrowhead(ax, [anchors_x(i_arrow) anchors_v(i_arrow)], angles(i_arrow), arrow_specs.length, arrow_specs.width, arrow_specs.color)
-%         end
-%         
         plot(ax, anchors_x, anchors_v, 'o', 'markersize', arrow_specs.width, 'markerfacecolor', arrow_specs.color, 'color', 'none');
     end
 
@@ -173,16 +145,6 @@ drawSlipPhasePortrait ...
         arrow_times = [flip(arrow_times_neg) arrow_times_pos];
         anchors_x = p + (x_0 - p)*cosh(omega*arrow_times) + v_0/omega*sinh(omega*arrow_times);
         anchors_v = (x_0 - p)*sinh(omega*arrow_times)*omega + v_0*cosh(omega*arrow_times);
-%         arrow_times_delta = arrow_times + 1e-3;
-%         anchors_x_delta = p + (x_0 - p)*cosh(omega*arrow_times_delta) + v_0/omega*sinh(omega*arrow_times_delta);
-%         anchors_v_delta = (x_0 - p)*sinh(omega*arrow_times_delta)*omega + v_0*cosh(omega*arrow_times_delta);
-%         arrows_x = anchors_x_delta - anchors_x;
-%         arrows_v = anchors_v_delta - anchors_v;
-%         angles = atan2(arrows_v, arrows_x);
-%         
-%         for i_arrow = 1 : length(angles)
-%             plotArrowhead(ax, [anchors_x(i_arrow) anchors_v(i_arrow)], angles(i_arrow), arrow_specs.length, arrow_specs.width, arrow_specs.color)
-%         end
         
         plot(ax, anchors_x, anchors_v, 'o', 'markersize', arrow_specs.width, 'markerfacecolor', arrow_specs.color, 'color', 'none');
     end

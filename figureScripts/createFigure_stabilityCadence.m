@@ -1,7 +1,9 @@
-
 % flags
 save_figure             = 0;
 labels                  = 'on';
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 % parameters
 cadences_to_use = [80 110];
@@ -9,7 +11,7 @@ b_p_min = 0;
 b_p_max = 5;
 b_v_min = 0;
 b_v_max = 1.5;
-z_c = 0.814;
+z_c = 0.77;
 g = 9.81;
 
 % colors
@@ -48,7 +50,7 @@ for i_cadence = 1 : number_of_cadences
         beta_v_left = beta_v_left_unsorted;
         beta_v_right = beta_v_right_unsorted;
     else
-        error('Subject order for left and right not the same. Need to sort by subject, but this is not implemented yet.')
+        error('Subject order for left and right not the same.')
     end
     beta_p = (beta_p_left + beta_p_right) * 0.5;
     beta_v = (beta_v_left + beta_v_right) * 0.5;
@@ -72,6 +74,7 @@ elseif strcmp(labels, 'off')
 end
 
 % stability regions
+patch_handles = [];
 for i_cadence = 1 : number_of_cadences
     % calculate dependent variables
     bpm = cadences_to_use(i_cadence);
@@ -90,7 +93,8 @@ for i_cadence = 1 : number_of_cadences
     P1 = [2*c, 2*s/omega];
     P2 = [2*s^2/c, 2*s/omega];
     P3 = [2*c, 2*c^2/(omega*s)];
-    patch([P1(1) P2(1) P3(1)], [P1(2) P2(2) P3(2)], [0 0 0], 'facecolor', lightenColor(this_color, 0.5), 'edgecolor', 'none')
+    h = patch([P1(1) P2(1) P3(1)], [P1(2) P2(2) P3(2)], [0 0 0], 'facecolor', lightenColor(this_color, 0.5), 'edgecolor', 'none');
+    patch_handles = [patch_handles, h]; %#ok<AGROW> 
 
     % plot data
     markersize = 10;
@@ -106,6 +110,9 @@ for i_cadence = 1 : number_of_cadences
 
 end
 
+for i_cadence = 1 : number_of_cadences
+    uistack(patch_handles(i_cadence), 'bottom')
+end
 % save
 if save_figure
     % save with labels

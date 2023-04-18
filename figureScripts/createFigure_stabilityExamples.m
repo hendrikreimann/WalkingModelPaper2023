@@ -1,7 +1,10 @@
 % flags
 individual_figures          = 1;
 save_figures                = 1;
-labels                      = 'off';
+labels                      = 'on';
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 % visualization parameters
 figure_width = 600;
@@ -18,12 +21,12 @@ color_5 = hex2rgb('#880ACC'); % purple
 colors = [color_1; color_2; color_3; color_5];
 
 % set parameters
-dt = 1e-5;
+dt = 1e-4;
 metronome_frequency = 1;
-T_total_ref = 2;
-T_total_pert = 8;
+T_total_ref = 1;
+T_total_pert = 9;
 T_step = 1/(2*metronome_frequency);
-z_c = 0.814;            % repeats the values in the simulation
+z_c = 1;
 g = 9.81;
 omega = sqrt(g/z_c);
 c = cosh(omega * T_step * 0.5);
@@ -33,7 +36,7 @@ s = sinh(omega * T_step * 0.5);
 b_o = 0.02;
 b_p = 2.5;
 b_d = 0.6;
-delta_b_d = [-0.2 0 0.3 0.6];
+delta_b_d = [-0.3 0 0.5 0.9];
 
 % define initial conditions
 p_0 = 0.0;
@@ -88,7 +91,7 @@ for i_system = 1 : number_of_systems
     b_d_here = b_d + delta_b_d(i_system);
     plot(results{i_system}.continuous.time + T_total_ref, results{i_system}.continuous.x, 'color', colors(i_system, :), 'linewidth', linewidth, 'LineStyle', '-', 'DisplayName', 'CoM', 'displayname', num2str(b_d_here));
 end
-ylim([-0.2 0.4])
+ylim([-0.1 0.5])
 xlabel('time (s)', 'fontsize', 14)
 ylabel('lateral position', 'fontsize', 14)
 if strcmp(labels, 'on')

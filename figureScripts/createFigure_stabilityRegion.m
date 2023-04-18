@@ -2,31 +2,30 @@
 % flags
 plot_delimiter_lines    = 1;
 plot_triangle           = 0;
-plot_data               = 0;
 plot_zero_cover         = 1;
-save_figure             = 1;
-labels                  = 'off';
+save_figure             = 0;
+labels                  = 'on';
+
+% suppress warnings from flags
+%#ok<*UNRCH> 
 
 cadence_to_use = 120;
 minute_to_second = 1/60;
 bpm = cadence_to_use;
 metronome_frequency = bpm * 0.5 * minute_to_second; % two beats per metronome cycle
-
-
 stride_time = metronome_frequency.^(-1);
 step_time = stride_time * 0.5;
-
 
 %% create surf
 b_p_min = 0;
 b_p_max = 5;
 b_v_min = 0;
 b_v_max = 1.5;
-b_p_number_of_steps = 2001; % set this to 1000 or so for final figures
-b_v_number_of_steps = 2001;
+b_p_number_of_steps = 201; % this value is high for high resolution images, can reduce to speed things up if needed
+b_v_number_of_steps = 201;
 
 % set parameters
-z_c = 0.814;
+z_c = 1;
 g = 9.81;
 
 % calculate dependent variables
@@ -52,14 +51,14 @@ for i_p = 1 : b_p_number_of_steps
     b_p_here = b_p_grid(i_p);
     for i_v = 1 : b_v_number_of_steps
         b_v_here = b_v_grid(i_v);
-        M_here = ...
+        A_here = ...
             [ ...
               (- c*b_p_here + c^2 + s^2),  - (c*b_v_here - 2/omega*c*s); ...
               (2*c - b_p_here)*omega*s, (- b_v_here*omega*s + c^2 + s^2) ...
             ];
         
         % Eigendecomposition to get spectral norm rho(M) (https://en.wikipedia.org/wiki/Convergent_matrix)
-        D = eig(M_here);
+        D = eig(A_here);
         rho = max(abs(D));
         Z_rho(i_v, i_p) = rho;
         
@@ -89,10 +88,7 @@ elseif strcmp(labels, 'off')
     file_label = 'noLabels';
 end
 
-
 % plot surf
-% surf(B_P, B_V, -Z_rho, C_rho, 'AlphaData', alpha_data_rho, 'facecolor', 'interp')
-
 surf(B_P, B_V, -Z_rho, 'AlphaData', alpha_data_rho, 'facecolor', 'interp')
 clim([-1 0])
 
