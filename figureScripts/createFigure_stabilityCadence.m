@@ -1,5 +1,7 @@
 % flags
 save_figure             = 0;
+normalize_by_leg_length = 1;
+report_r_square         = 0;
 labels                  = 'on';
 
 % suppress warnings from flags
@@ -32,6 +34,8 @@ data_file = '../../data/foot_placement_ml_by_com_50_CAD.csv';
 human_data = readtable(data_file);
 beta_p_data = cell(number_of_cadences, 1);
 beta_v_data = cell(number_of_cadences, 1);
+r_square_left_data = cell(number_of_cadences, 1);
+r_square_right_data = cell(number_of_cadences, 1);
 for i_cadence = 1 : number_of_cadences
     this_cadence = cadences_to_use(i_cadence);
     
@@ -43,12 +47,15 @@ for i_cadence = 1 : number_of_cadences
     beta_v_right_unsorted = table2array(human_data(indicator_right, 'foot_placement_ml_by_com_50_slope_2'));
     subjects_left = table2cell(human_data(indicator_left, 'subject'));
     subjects_right = table2cell(human_data(indicator_right, 'subject'));
+    r_square_left = table2array(human_data(indicator_left, 'R_square'));
+    r_square_right = table2array(human_data(indicator_right, 'R_square'));
     
     if isequal(subjects_left, subjects_right)
         beta_p_left = beta_p_left_unsorted;
         beta_p_right = beta_p_right_unsorted;
         beta_v_left = beta_v_left_unsorted;
         beta_v_right = beta_v_right_unsorted;
+        subjects = subjects_left;
     else
         error('Subject order for left and right not the same.')
     end
@@ -57,6 +64,46 @@ for i_cadence = 1 : number_of_cadences
 
     beta_p_data{i_cadence} = beta_p;
     beta_v_data{i_cadence} = beta_v;
+
+    r_square_left_data{i_cadence} = r_square_left;
+    r_square_right_data{i_cadence} = r_square_right;
+    
+end
+
+% report r square
+if report_r_square
+    r_square_left_80_min = min(r_square_left_data{1})
+    r_square_left_110_min = min(r_square_left_data{2})
+    r_square_left_80_max = max(r_square_left_data{1})
+    r_square_left_110_max = max(r_square_left_data{2})
+
+    r_square_right_80_min = min(r_square_right_data{1})
+    r_square_right_110_min = min(r_square_right_data{2})
+    r_square_right_80_max = max(r_square_right_data{1})
+    r_square_right_110_max = max(r_square_right_data{2})
+
+    r_square_80_min = min([r_square_left_data{1}; r_square_right_data{1}])
+    r_square_110_min = min([r_square_left_data{2}; r_square_right_data{2}])
+    r_square_80_max = max([r_square_left_data{1}; r_square_right_data{1}])
+    r_square_110_max = max([r_square_left_data{2}; r_square_right_data{2}])
+
+    return
+end
+
+% normalize
+if normalize_by_leg_length
+    data_file = '../../data/legLength_CAD.mat';
+    loaded_data = load(data_file);
+    length_data = loaded_data.data_table;
+    
+    for i_subject = 1 : length(subjects)
+        this_subject = subjects{i_subject};
+        this_subject_leg_length = length_data{strcmp(length_data.subject, this_subject), "leg_length"};
+        for i_cadence = 1 : number_of_cadences
+            beta_p_data{i_cadence}(i_subject) = beta_p_data{i_cadence}(i_subject) * 1/this_subject_leg_length;
+            beta_v_data{i_cadence}(i_subject) = beta_v_data{i_cadence}(i_subject) * 1/sqrt(this_subject_leg_length);
+        end
+    end
 end
 
 % create figure

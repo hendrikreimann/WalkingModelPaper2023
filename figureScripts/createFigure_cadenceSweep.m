@@ -1,8 +1,8 @@
 % flags
 save_figures            = 0;
 labels                  = 'on';
-beta_d                  = 1;
 run_stats               = 1;
+normalize_by_leg_length = 1;
 
 % suppress warnings from flags
 %#ok<*UNRCH> 
@@ -96,6 +96,23 @@ for i_cadence = 1 : number_of_cadences_human
     cadence_actual_data{i_cadence} = cadence_actual;
 end
 
+% normalize
+if normalize_by_leg_length
+    data_file = '../../data/legLength_CAD.mat';
+    loaded_data = load(data_file);
+    length_data = loaded_data.data_table;
+    
+    for i_subject = 1 : length(subjects)
+        this_subject = subjects{i_subject};
+        this_subject_leg_length = length_data{strcmp(length_data.subject, this_subject), "leg_length"};
+        for i_cadence = 1 : number_of_cadences_human
+            beta_p_data{i_cadence}(i_subject) = beta_p_data{i_cadence}(i_subject) * 1/this_subject_leg_length;
+            beta_v_data{i_cadence}(i_subject) = beta_v_data{i_cadence}(i_subject) * 1/sqrt(this_subject_leg_length);
+        end
+    end
+end
+
+% stats
 if run_stats
     [hypothesis_p, p_value_p] = ttest(beta_p_data{1}, beta_p_data{2});
     [hypothesis_v, p_value_v] = ttest(beta_v_data{1}, beta_v_data{2});
