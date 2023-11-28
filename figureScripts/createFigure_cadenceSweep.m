@@ -58,7 +58,7 @@ end
 % load and extract data
 cadences_human = [80, 110];
 number_of_cadences_human = length(cadences_human);
-data_file = '../../data/foot_placement_ml_by_com_50_CAD.csv';
+data_file = '../data/foot_placement_ml_by_com_50_CAD.csv';
 human_data = readtable(data_file);
 beta_p_data = cell(number_of_cadences_human, 1);
 beta_v_data = cell(number_of_cadences_human, 1);
@@ -84,6 +84,7 @@ for i_cadence = 1 : number_of_cadences_human
         beta_v_right = beta_v_right_unsorted;
         cadence_actual_left = cadence_actual_left_unsorted;
         cadence_actual_right = cadence_actual_right_unsorted;
+        subjects = subjects_left;
     else
         error('Subject order for left and right not the same. Need to sort by subject, but this is not implemented yet.')
     end

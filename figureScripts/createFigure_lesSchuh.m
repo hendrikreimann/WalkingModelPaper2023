@@ -7,7 +7,7 @@ labels                      = 'on';
 %#ok<*UNRCH> 
 
 % load and extract data
-data_file = '../../data/16-Nov-2022_R2_stepwidth.mat';
+data_file = '../data/16-Nov-2022_R2_stepwidth.mat';
 load(data_file)
 soi=25;
 beta_p = squeeze(beta1(:,soi,:));

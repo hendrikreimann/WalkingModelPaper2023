@@ -30,7 +30,7 @@ number_of_cadences = length(cadences_to_use);
 
 
 % load and extract data
-data_file = '../../data/foot_placement_ml_by_com_50_CAD.csv';
+data_file = '../data/foot_placement_ml_by_com_50_CAD.csv';
 human_data = readtable(data_file);
 beta_p_data = cell(number_of_cadences, 1);
 beta_v_data = cell(number_of_cadences, 1);
@@ -92,7 +92,7 @@ end
 
 % normalize
 if normalize_by_leg_length
-    data_file = '../../data/legLength_CAD.mat';
+    data_file = '../data/legLength_CAD.mat';
     loaded_data = load(data_file);
     length_data = loaded_data.data_table;
     
